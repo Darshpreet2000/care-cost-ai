@@ -4,8 +4,8 @@ import asyncio
 from fastapi import FastAPI, Request
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
-from google.adk.agents.invocation_context import InvocationContext
-from google.adk.events.event import Event
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
 from workflow import workflow
 
 # Initialize FastAPI app
@@ -20,19 +20,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Initialize ADK Runner
+session_service = InMemorySessionService()
+runner = Runner(agent=workflow, session_service=session_service)
+
 # --- API Endpoints ---
 
-@app.get("/api/stream-progress")
-async def stream_progress(query: str, request: Request):
+@app.get("/workflow/stream")
+async def stream_workflow(query: str, request: Request):
     async def event_generator():
-        context = InvocationContext()
-        context.set_state("user_query", query) # Store the initial user query
-
-        async for event in workflow.run(context):
+        async for event in runner.async_stream_query(
+            user_id="user-123",
+            message=query
+        ):
             if await request.is_disconnected():
                 break
-            yield f"data: {json.dumps({'agent': event.agent_name, 'message': event.output_value})}\n\n"
-            await asyncio.sleep(0.1) # Small delay to simulate processing
+            yield f"data: {event.json()}\\n\\n"
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 

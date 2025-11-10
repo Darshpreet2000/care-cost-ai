@@ -13,3 +13,4 @@ workflow = SequentialAgent(
         finance_agent, care_agent, insight_agent
     ]
 )
+agent = workflow 
