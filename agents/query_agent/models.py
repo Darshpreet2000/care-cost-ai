@@ -2,6 +2,9 @@ from pydantic import BaseModel
 from typing import List
 
 class QueryRecommendation(BaseModel):
-    priorities: List[str]
-    recommendation: str
-    trigger_agents: List[str]
+    procedure: str
+    drg_code: str
+    drg_description: str
+    cpt_codes: list[str]
+    justification: str
+    user_chat_message: str
