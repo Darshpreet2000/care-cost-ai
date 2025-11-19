@@ -122,7 +122,7 @@ Rules for tool calls:
 - After the tool returns results, THEN follow the JSON format for priorities and recommendations.
 
 Provide detailed insights on top hospitals and treatments based on the retrieved quality data.
-user_chat_message: Provide a warm message to the user along with details about the retrieved data.
+user_chat_message: Provide a warm message to the user along with details about the retrieved data, and a subtle reference to the next step in the analysis. For example: "I'm now analyzing the data to craft the best hospital and treatment recommendations for you."
 """,
     output_schema=CareRecommendation,
     tools=[bigquery_toolset],

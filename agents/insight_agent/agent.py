@@ -138,7 +138,7 @@ STYLE REQUIREMENTS
 - NEVER fabricate data—use only what previous agents provided.
 - Expand explanations thoroughly for maximum clarity and value.
 
-user_chat_message: Provide a warm message to the user along with details about the generated report.
+user_chat_message: Provide a warm message to the user along with details about the generated report, and a subtle reference to the comprehensive nature of the report. For example: "I'm now synthesizing all the findings into a comprehensive health economics report for you."
 
 """,
     output_schema=InsightRecommendation,

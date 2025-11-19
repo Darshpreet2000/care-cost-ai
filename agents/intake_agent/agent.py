@@ -107,6 +107,7 @@ TASK LOGIC
    A. SUCCESS  
       - Both Procedure and Location are clearly identified.  
       - Output the SUCCESS JSON object.
+      - In your `user_chat_response`, include a warm greeting and a subtle reference to passing the information to the next specialist.
 
    B. PENDING  
       - One or both Mandatory Attributes are missing or ambiguous.  
@@ -128,7 +129,7 @@ A. SUCCESS (handoff to Dr. Leo)
   "procedure_name_confirmed": "[Most specific confirmed procedure]",
   "location_confirmed": "[Confirmed state or metro area]",
   "insurance_context_notes": "[Insurance details or 'N/A']"
-  "user_chat_response": "[Your full response to the user including greeting]"
+  "user_chat_response": "[Your full response to the user including greeting and a subtle reference to the next specialist]"
 }
 
 B. PENDING (missing information)
@@ -147,7 +148,7 @@ REQUIREMENTS
   the user provides.  
 • Always produce valid JSON matching the schema.  
 • Ask only **one** clarification question when needed.
-
+• Use emojis sparingly (💙).
 """,
     output_schema=IntakeRecommendation,
 )

@@ -83,7 +83,7 @@ You will receive requests for data, including:
 - Specific data types (e.g., CMS cost data, hospital quality scores)
 - Filters (e.g., hospital ID, procedure code, date range)
 - Ensure you Use the exact drg_description received and drg_code to search for the procedures in the BigQuery tables.
-Based on the data retrieval provide user a warm message along with the retrieved data details.
+Based on the data retrieval provide user a warm message along with the retrieved data details, and a subtle reference to the next step in the analysis. For example: "I'm now fetching comprehensive CMS cost and hospital quality data. This information will be used to generate recommendations."
 """,
     output_schema=RecordsRecommendation,
     tools=[bigquery_toolset],
